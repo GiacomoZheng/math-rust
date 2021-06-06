@@ -51,15 +51,30 @@ pub trait Complex {
 	fn is_empty(&self) -> bool {
 		self.component().is_empty()
 	}
-	fn dim(&self) -> Result<usize, ()> {
+	fn dim(&self) -> Result<usize, &str> {
 		if self.is_empty() {
-			Err(())
+			Err("the complex is empty")
 		} else {
 			Ok(self.component().len() - 1)
 		}
 	}
+	/// Euler characteristic
+	fn euler(&self) -> isize {
+		// unimplemented!();
+		let mut sum : isize = 0;
+		for (i, n) in self.component().iter_finite().cloned().enumerate() {
+			if i % 2 == 0 {
+				sum += n as isize;
+			} else {
+				sum -= n as isize;
+			}
+		}
+		sum
+	}
 }
-pub mod complexes;
+
+// #[macro_use]
+mod complexes;
 pub use complexes::*;
 
 // In this package, I'll regard simplex and complex as totally different things
