@@ -1,2 +1,2 @@
 # cell complex
-Intuitively speaking, I open this package for my complex_the_game board game. You can find this game in my repos soon.
+a rust implement for a math concept cell complex. I'll not continue it these days.
