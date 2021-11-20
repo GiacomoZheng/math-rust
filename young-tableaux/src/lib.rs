@@ -2,10 +2,7 @@ use std::fmt;
 use std::cmp::{PartialEq, PartialOrd, Ordering};
 use std::ops::{Mul}; //, Deref, DerefMut};
 
-pub trait MathClass {
-	/// criteria for a math concept
-	fn check(&self) -> Result<(), String>;
-}
+use general::MathClass;
 
 mod tableau;
 pub use tableau::{Filling, Numbering, Tableau, StandardTableau, SkewTableau};

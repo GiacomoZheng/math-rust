@@ -1,2 +1,7 @@
 [workspace]
-members = ["young-tableaux", "cell-complex", "toric-variety"]
+members = [
+	"general",
+	"young-tableaux", "toric-variety",
+
+	"cell-complex",
+]

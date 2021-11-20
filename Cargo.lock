@@ -7,9 +7,19 @@ name = "cell-complex"
 version = "0.1.0"
 
 [[package]]
+name = "general"
+version = "0.1.0"
+
+[[package]]
 name = "toric-variety"
 version = "0.1.0"
+dependencies = [
+ "general",
+]
 
 [[package]]
 name = "young-tableaux"
 version = "0.1.0"
+dependencies = [
+ "general",
+]
