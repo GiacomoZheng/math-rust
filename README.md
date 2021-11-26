@@ -2,8 +2,8 @@
 I'll try to use rust to implement some math concepts
 
 ## List
-* Young Tableau
-* Toric Variety
+* Young Tableaux
+* Toric Varieties
 
 ## List deprecated
 * Cell Complex

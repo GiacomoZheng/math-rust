@@ -1,5 +1,5 @@
 [package]
-name = "toric-variety"
+name = "toric-varieties"
 version = "0.1.0"
 authors = ["GiacomoZheng <giacomo821@outlook.com>"]
 edition = "2021"

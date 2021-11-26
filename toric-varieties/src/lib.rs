@@ -99,6 +99,8 @@ impl Cone {
 }
 impl fmt::Debug for Cone {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		// i hope it can output a basis of it
+		write!(f, "a");
 		unimplemented!()
     }
 }
