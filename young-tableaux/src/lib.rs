@@ -1,14 +1,14 @@
-use std::fmt;
-use std::cmp::{PartialEq, PartialOrd, Ordering};
-use std::ops::{Mul}; //, Deref, DerefMut};
+// use std::fmt;
+use std::cmp::{PartialOrd, Ordering};
+use std::ops::Mul;
 
 use general::MathClass;
 
-mod tableau;
-pub use tableau::{Filling, Numbering, Tableau, StandardTableau, SkewTableau};
+mod tableaux;
+pub use tableaux::{Filling, Numbering, Tableau, StandardTableau, SkewTableau};
 
-mod word;
-pub use word::{Word, TwoRowedArray};
+mod words;
+pub use words::Word;
 
 impl Mul for Tableau {
 	type Output = Self;
@@ -60,6 +60,7 @@ impl Word {
 		tableau
 	}
 }
+
 impl Filling {
 	/// w(T) = from left below side to right and row by row upwards
 	pub fn to_word(&self) -> Word {
@@ -106,6 +107,7 @@ impl SkewTableau {
 
 	assert_eq!(word.to_tableau().to_word(), col_word.to_tableau().to_word());
 }
+
 impl PartialOrd for Numbering { // +
 	fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         if let Some(order) = self.shape().partial_cmp(&other.shape()) {
@@ -126,45 +128,9 @@ impl PartialOrd for Numbering { // +
 	unimplemented!()
 }
 
-// --------------------------------------------------------------
-#[derive(Debug, PartialEq, Eq)]
-pub struct TableauPair(Tableau, Tableau);
-impl MathClass for TableauPair {
-	fn check(&self) -> Result<(), String> {
-		if self.0.shape() != self.1.shape() {
-			Err("these two tableau has different shape".into())
-		} else {
-			Ok(())
-		}
-	}
-}
-impl fmt::Display for TableauPair {
-	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-		write!(f, "P:\n{}\nQ:\n{}", self.value_tableau(), self.index_tableau())
-    }
-}
-
+pub use tableaux::TableauPair;
+pub use words::TwoRowedArray;
 impl TableauPair {
-	#[allow(non_snake_case)]
-	pub fn from(P : Tableau, Q : Tableau) -> TableauPair {
-		let T = TableauPair(P, Q);
-		if let Err(s) = T.check() {
-			panic!("TableauPair: {}", s);
-		}
-		T
-	}
-
-	/// P in (P, Q)
-	pub fn value_tableau(&self) -> Tableau {
-		self.0.clone()
-	}
-
-	/// Q in (P, Q)
-	pub fn index_tableau(&self) -> Tableau {
-		self.1.clone()
-	}
-	pub fn insertion_tableau(&self) -> Tableau {self.index_tableau()}
-
 	pub fn to_two_rowed_array(&self) -> TwoRowedArray {
 		let mut v = Vec::new();
 
@@ -197,7 +163,7 @@ impl TwoRowedArray {
 			Q.place_at_row(P.row_bumping(value), index);
 		}
 		
-		TableauPair(P, Q)
+		TableauPair::from(P, Q)
 	}
 }
 #[test] fn conversion() {
@@ -208,8 +174,8 @@ impl TwoRowedArray {
 	assert_eq!(t.rev(), array.inverse().to_tableau_pair());
 }
 
-mod matrix;
-pub use matrix::{Matrix, BallMatrix};
+mod matrices;
+pub use matrices::{Matrix, BallMatrix};
 
 impl TwoRowedArray {
 	pub fn to_matrix_0(&self) -> Matrix {

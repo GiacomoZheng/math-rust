@@ -1,7 +1,9 @@
 [workspace]
 members = [
-	"general",
-	"young-tableaux", "toric-varieties",
+	"general", "general_macro",
 
-	"cell-complex",
+	"young-tableaux",
+	
+	# TODO
+	"toric-varieties","cell-complex",
 ]

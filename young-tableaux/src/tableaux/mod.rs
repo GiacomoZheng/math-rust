@@ -655,7 +655,6 @@ impl Tableau {
 	// println!("{}", tableau);
 }
 
-
 impl fmt::Display for Tableau {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
 		for v in self.0.iter_finite() {
@@ -1163,4 +1162,43 @@ impl fmt::Display for SkewTableau {
 	]);
 	// println!("{}", tableau);
 	assert_eq!(format!("{}", tableau), String::from("□ 6 7 8 \n5 7 8 \n6 8 \n"));
+}
+
+#[derive(Debug, PartialEq, Eq)]
+pub struct TableauPair(Tableau, Tableau);
+impl MathClass for TableauPair {
+	fn check(&self) -> Result<(), String> {
+		if self.0.shape() != self.1.shape() {
+			Err("these two tableau has different shape".into())
+		} else {
+			Ok(())
+		}
+	}
+}
+impl fmt::Display for TableauPair {
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		write!(f, "P:\n{}\nQ:\n{}", self.value_tableau(), self.index_tableau())
+    }
+}
+
+impl TableauPair {
+	#[allow(non_snake_case)]
+	pub fn from(P : Tableau, Q : Tableau) -> TableauPair {
+		let T = TableauPair(P, Q);
+		if let Err(s) = T.check() {
+			panic!("TableauPair: {}", s);
+		}
+		T
+	}
+
+	/// P in (P, Q)
+	pub fn value_tableau(&self) -> Tableau {
+		self.0.clone()
+	}
+
+	/// Q in (P, Q)
+	pub fn index_tableau(&self) -> Tableau {
+		self.1.clone()
+	}
+	pub fn insertion_tableau(&self) -> Tableau {self.index_tableau()}
 }
