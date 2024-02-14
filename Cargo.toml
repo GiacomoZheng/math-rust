@@ -1,9 +1,11 @@
 [workspace]
 members = [
-	"general", "general_macro",
+	"general","alias", "general_marco",
 
 	"young-tableaux",
 	
 	# TODO
-	"toric-varieties","cell-complex",
+	"toric-varieties","cell-complex", 
 ]
+
+resolver = "2"

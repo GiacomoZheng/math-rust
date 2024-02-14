@@ -1,0 +1,7 @@
+[package]
+name = "alias"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+general_marco = { path = "../general_marco" }
