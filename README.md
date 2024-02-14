@@ -2,8 +2,10 @@
 I'll try to use rust to implement some math concepts
 
 ## List
+* general
+  * Algebra
+
 * Young Tableaux
-* Toric Varieties
 
 ## List deprecated
 * Cell Complex
