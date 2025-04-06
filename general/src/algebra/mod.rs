@@ -3,6 +3,8 @@ use std::ops::{Add, Deref, DerefMut, Div, Mul};
 use std::fmt::Debug;
 use alias::{BasicObject, BasicObjectCopy};
 
+mod just_for_fun;
+
 pub trait AddGroup : BasicObjectCopy + Add {
 	fn zero() -> Self;
 	fn is_zero(&self) -> bool {
